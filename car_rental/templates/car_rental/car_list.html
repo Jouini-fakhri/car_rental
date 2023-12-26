@@ -1,0 +1,36 @@
+<!-- templates/car_rental/car_list.html -->
+{% extends 'car_rental/base.html' %}
+
+{% block title %}Car List{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Car List</h2>
+        <div class="row">
+            {% for car in cars %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
+                            <p class="card-text">
+                                {% if car.car_image %}
+                                    {{ car.car_image }}
+                                {% else %}
+                                    No image available.
+                                {% endif %}
+                            </p>
+                            <a href="{% url 'car_detail' pk=car.pk %}" class="btn btn-primary">Details</a>
+                            {% if user.is_authenticated %}
+                                <a href="{% url 'car_edit' pk=car.pk %}" class="btn btn-warning">Edit</a>
+                                <a href="{% url 'car_delete' pk=car.pk %}" class="btn btn-danger">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'car_new' %}" class="btn btn-primary mt-3">Add a new car</a>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    border: 1px solid #ddd;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+a {
+    color: #007BFF;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.card {
+    width: 100%; /* Adjust the width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
+
+.card-body {
+    padding: 20px; /* Increase padding for more space inside the card */
+}

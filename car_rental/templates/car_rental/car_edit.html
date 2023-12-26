@@ -1,0 +1,25 @@
+<!-- car_rental/templates/car_rental/car_edit.html -->
+{% extends 'car_rental/base.html' %}
+
+{% block title %}Edit Car{% endblock %}
+
+{% block extra_css %}
+    {% load static %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'car_rental/css/car_edit.css' %}">
+    <!-- Add any additional CSS files needed for this template -->
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <header>
+            <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Car</h1>
+        </header>
+
+        <form method="POST" class="car-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+    </div>
+{% endblock %}
