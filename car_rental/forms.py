@@ -16,3 +16,6 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'password1', 'password2']
+
+class CarBrandFilterForm(forms.Form):
+    brand = forms.CharField(label='Brand', required=False)

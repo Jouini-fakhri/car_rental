@@ -6,10 +6,31 @@
 {% block content %}
     <div class="container mt-5">
         <h2>Car List</h2>
+
+        <!-- Brand Filter Form -->
+        <form method="get" class="mb-3">
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="brandFilter">Brand:</label>
+                    <select id="brandFilter" name="brand" class="form-control">
+                        <option value="">All Brands</option>
+                        {% for brand in brands %}
+                            <option value="{{ brand }}" {% if brand == brand_filter %}selected{% endif %}>{{ brand }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <button type="submit" class="btn btn-primary">Filter</button>
+                </div>
+            </div>
+        </form>
+
         <div class="row">
             {% for car in cars %}
                 <div class="col-md-4">
                     <div class="card mb-4">
+                        <img src="{% if car.car_image %}{{ car.car_image.url }}{% else %}/static/car_rental/images/car.jpeg{% endif %}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
                             <p class="card-text">
@@ -29,6 +50,7 @@
                 </div>
             {% endfor %}
         </div>
+
         {% if user.is_authenticated %}
             <a href="{% url 'car_new' %}" class="btn btn-primary mt-3">Add a new car</a>
         {% endif %}

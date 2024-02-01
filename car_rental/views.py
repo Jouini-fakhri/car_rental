@@ -10,10 +10,30 @@ from django.contrib.auth.views import LogoutView
 from django.urls import reverse_lazy
 from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Car
+from .forms import CarBrandFilterForm
 
 def car_list(request):
+    # Get all cars initially
     cars = Car.objects.all()
-    return render(request, 'car_rental/car_list.html', {'cars': cars})
+
+    # Handle brand filter if provided in the request
+    brand_filter = request.GET.get('brand', '')
+    if brand_filter:
+        cars = cars.filter(brand=brand_filter)
+
+    # Retrieve unique brand values for the filter dropdown
+    brands = Car.objects.values_list('brand', flat=True).distinct()
+
+    # Context data to pass to the template
+    context = {
+        'cars': cars,
+        'brands': brands,
+        'brand_filter': brand_filter,
+    }
+
+    return render(request, 'car_rental/car_list.html', context)
 
 def car_detail(request, pk):
     car = get_object_or_404(Car, pk=pk)
