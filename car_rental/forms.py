@@ -17,7 +17,7 @@ class CarForm(forms.ModelForm):
         ('Luxury', 'Luxury'),
     ]
     category = forms.ChoiceField(choices=CATEGORY_CHOICES)
-    car_image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    car_image = forms.ImageField(required=False, widget=forms.FileInput)
 
 class SignUpForm(UserCreationForm):
     class Meta:

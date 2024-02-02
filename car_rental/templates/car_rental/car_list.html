@@ -11,8 +11,8 @@
         <form method="get" class="mb-3">
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="brandFilter">Brand:</label>
-                    <select id="brandFilter" name="brand" class="form-control">
+                    
+                      <select id="brandFilter" name="brand" class="form-control">
                         <option value="">All Brands</option>
                         {% for brand in brands %}
                             <option value="{{ brand }}" {% if brand == brand_filter %}selected{% endif %}>{{ brand }}</option>
@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="form-group col-md-2">
-                    <button type="submit" class="btn btn-primary">Filter</button>
+                    <button type="submit" class="btn btn-primary">Search</button>
                 </div>
             </div>
         </form>
@@ -30,7 +30,9 @@
             {% for car in cars %}
                 <div class="col-md-4">
                     <div class="card mb-4">
-                        
+                        {% if car.car_image %}
+                            <img src="{{ car.car_image.url }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
+                        {% endif %}
                         <div class="card-body">
                             <h5 class="card-title">{{ car.brand }} {{ car.model }}</h5>
                             <a href="{% url 'car_detail' pk=car.pk %}" class="btn btn-primary">Details</a>

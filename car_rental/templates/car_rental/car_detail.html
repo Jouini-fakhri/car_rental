@@ -20,13 +20,16 @@
             <p>Category: {{ car.category }}</p>
             <p>Price: {{ car.price }}</p>
             <p>Return Date: {{ car.return_date }}</p>
+
             
             {% if car.car_image %}
                 <img src="{{ car.car_image.url }}" alt="{{ car.brand }} Image">
             {% endif %}
+            <div>          
             {% if user.is_authenticated %}
             <a href="{% url 'car_edit' pk=car.pk %}">Edit</a>
             {% endif %}
+            </div>
         </div>
 
         <a href="{% url 'car_list' %}">Back to list</a>

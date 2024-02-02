@@ -1,4 +1,5 @@
 # car_rental/views.py
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate
@@ -50,7 +51,11 @@ def car_new(request):
         form = CarForm()
     return render(request, 'car_rental/car_edit.html', {'form': form})
 
-@login_required
+def success(request):
+    return HttpResponse('successfully uploaded')
+
+
+""" @login_required
 def car_edit(request, pk):
     car = get_object_or_404(Car, pk=pk)
     if request.method == "POST":
@@ -63,6 +68,24 @@ def car_edit(request, pk):
     else:
         form = CarForm(instance=car)
     return render(request, 'car_rental/car_edit.html', {'form': form})
+ """
+ 
+@login_required
+def car_edit(request, pk):
+    car = get_object_or_404(Car, pk=pk)
+
+    if request.method == "POST":
+        form = CarForm(request.POST, request.FILES, instance=car)
+        if form.is_valid():
+            car = form.save(commit=False)
+            car.save()
+            messages.success(request, 'Car updated successfully!')
+            return redirect('car_detail', pk=car.pk)
+    else:
+        form = CarForm(instance=car)
+
+    return render(request, 'car_rental/car_edit.html', {'form': form})
+
 
 @login_required
 def car_delete(request, pk):

@@ -1,6 +1,8 @@
 # urls.py
 from django.urls import path
-from .views import CustomLogoutView, home, login_view, signup, car_list, car_detail, car_new, car_edit, car_delete
+from .views import CustomLogoutView, home, login_view, signup, car_list, car_detail, car_new, car_edit, car_delete, success
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name='home'),
@@ -12,4 +14,8 @@ urlpatterns = [
     path('car/new/', car_new, name='car_new'),
     path('car/<int:pk>/edit/', car_edit, name='car_edit'),
     path('car/<int:pk>/delete/', car_delete, name='car_delete'),
+    path('success', success, name='success'),
 ]
+if settings.DEBUG:
+        urlpatterns += static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
