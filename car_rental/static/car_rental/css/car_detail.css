@@ -1,3 +1,5 @@
+/* static/car_rental/css/car_details.css */
+
 body {
     font-family: 'Arial', sans-serif;
     margin: 0;
@@ -19,6 +21,10 @@ header {
 
 .car-details {
     margin-top: 20px;
+}
+
+img {
+    max-width: 100%; /* Make sure images don't overflow their containers */
 }
 
 a {

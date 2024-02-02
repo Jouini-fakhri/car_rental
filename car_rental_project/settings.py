@@ -122,7 +122,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     # Absolute path to the 'static' directory in your app
-    os.path.join(BASE_DIR, 'car_rental/static'),
+    os.path.join(BASE_DIR, 'car_rental', 'static'),
 ]
 
 # Default primary key field type

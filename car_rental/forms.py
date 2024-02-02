@@ -12,6 +12,13 @@ class CarForm(forms.ModelForm):
             'return_date': forms.DateInput(attrs={'type': 'date'}),
         }
 
+    CATEGORY_CHOICES = [
+        ('Normal', 'Normal'),
+        ('Luxury', 'Luxury'),
+    ]
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES)
+    car_image = forms.ImageField(required=False, widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User

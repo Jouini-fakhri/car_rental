@@ -1,7 +1,7 @@
-<!-- car_rental/templates/car_rental/car_edit.html -->
+<!-- car_rental/templates/car_rental/car_add.html and car_edit.html -->
 {% extends 'car_rental/base.html' %}
 
-{% block title %}Edit Car{% endblock %}
+{% block title %}{% if form.instance.pk %}Edit{% else %}Add{% endif %} Car{% endblock %}
 
 {% block extra_css %}
     {% load static %}
@@ -16,7 +16,8 @@
             <h1>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Car</h1>
         </header>
 
-        <form method="POST" class="car-form">
+        <!-- Add enctype attribute for file uploads -->
+        <form method="POST" class="car-form" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Save</button>

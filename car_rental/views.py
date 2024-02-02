@@ -41,11 +41,10 @@ def car_detail(request, pk):
 
 @login_required
 def car_new(request):
-    if request.method == "POST":
-        form = CarForm(request.POST)
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES)
         if form.is_valid():
-            car = form.save(commit=False)
-            car.save()
+            car = form.save()
             return redirect('car_detail', pk=car.pk)
     else:
         form = CarForm()
