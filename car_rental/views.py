@@ -1,4 +1,6 @@
 # car_rental/views.py
+from django.contrib.auth import logout
+
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import AuthenticationForm
@@ -122,7 +124,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'car_rental/signup.html', {'form': form})
 
-class CustomLogoutView(LogoutView):
-    def dispatch(self, request, *args, **kwargs):
-        response = super().dispatch(request, *args, **kwargs)
-        return HttpResponseRedirect(reverse_lazy('home'))
+def custom_logout(request):
+    logout(request)
+    # You can redirect to another page after logout if needed
+    return redirect('home')
