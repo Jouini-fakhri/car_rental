@@ -28,7 +28,7 @@
 
         <div class="row">
             {% for car in cars %}
-                <div class="col-md-4">
+                <div class="col-md-4" >
                     <div class="card mb-4">
                         {% if car.car_image %}
                             <img src="{{ car.car_image.url }}" class="card-img-top" alt="{{ car.brand }} {{ car.model }}">
